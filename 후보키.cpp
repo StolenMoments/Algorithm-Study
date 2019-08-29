@@ -28,12 +28,12 @@ vector<int> solution(int N, vector<int> stages) {
         if (reach[i] == 0) q.push(mp(0, i));
         else q.push(mp((double)fail[i] / reach[i], i));
     }
-    
+
     vector<int> ans;
     while (!q.empty()) {
-		ans.push_back(q.top().second);
+	ans.push_back(q.top().second);
         q.pop();
-	}
+    }
     
     return ans;
 }

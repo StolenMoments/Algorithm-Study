@@ -12,11 +12,6 @@ int heap_idx;
 node heap[200000]; // 힙 영역에서 할당하는 방식이 동적 할당보다 빠르다. 삼성 B형에서 주로 활용하는 방식.
 
 class LIST {
-private:
-	bool empty_check() {
-		if (head->next == tail || tail->prev == head) return true;
-		return false;
-	}
 public:
 	node *head, *tail;
 
@@ -48,27 +43,27 @@ public:
 	}
 
 	void pop_front() {
-		if (empty_check()) return;
+		if (empty()) return;
 
 		head->next->next->prev = head;
 		head->next = head->next->next;
 	}
 
 	void pop_back() {
-		if (empty_check()) return;
+		if (empty()) return;
 
 		tail->prev->prev->next = tail;
 		tail->prev = tail->prev->prev;
 	}
 
 	int front() {
-		if (empty_check()) throw out_of_range("리스트가 비었습니다\n");
+		if (empty()) throw out_of_range("리스트가 비었습니다\n");
 
 		return head->next->value;
 	}
 
 	int back() {
-		if (empty_check()) throw out_of_range("리스트가 비었습니다\n");
+		if (empty()) throw out_of_range("리스트가 비었습니다\n");
 
 		return tail->prev->value;
 	}

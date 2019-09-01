@@ -11,6 +11,14 @@ int heap_idx;
 node heap[200000]; // 힙 영역에서 할당하는 방식이 동적 할당보다 빠르다. 삼성 B형에서 주로 활용하는 방식.
 
 class LIST {
+private:
+	bool empty_check() {
+		if (head->next == tail || tail->prev == head) {
+			printf("리스트가 비었습니다.\n");
+			return true;
+		}
+		return false;
+	}
 public:
 	node *head, *tail;
 
@@ -42,46 +50,37 @@ public:
 	}
 
 	void pop_front() {
-		if (head->next == tail) {
-			printf("리스트가 비었습니다.\n");
-			return;
-		}
+		if (empty_check()) return;
 
 		head->next->next->prev = head;
 		head->next = head->next->next;
 	}
 
 	void pop_back() {
-		if (tail->prev == head) {
-			printf("리스트가 비었습니다.\n");
-			return;
-		}
+		if (empty_check()) return;
 
 		tail->prev->prev->next = tail;
 		tail->prev = tail->prev->prev;
 	}
 
 	int front() {
-		if (head->next == tail) {
-			printf("리스트가 비었습니다.\n");
-			return;
-		}
+		if (empty_check()) return -1;
 
 		return head->next->value;
 	}
 
 	int back() {
-		if (tail->prev == head) {
-			printf("리스트가 비었습니다.\n");
-			return;
-		}
+		if (empty_check()) return -1;
 
 		return tail->prev->value;
 	}
 
+	bool empty() {
+		return head->next == tail;
+	}
+
 	void print() {
 		node *cur = head->next;
-
 		while (cur != tail) {
 			printf("%d ", cur->value);
 			cur = cur->next;
@@ -106,10 +105,15 @@ int main() {
 
 	list.print(); // 11 3 4 출력
 
+	printf("%d %d\n", list.front(), list.back()); // 11 4 출력
+
+
 	list.pop_front();
 	list.pop_front();
 	list.pop_front();
 	list.pop_back(); // 비었다는 메시지
+
+	printf("%d\n", list.empty()); // 1 출력
 
 	list.print(); // 공백 출력
 }

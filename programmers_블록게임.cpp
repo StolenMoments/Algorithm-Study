@@ -3,6 +3,14 @@
 #define FOR(i,a,b) for(int i = a; i < b; i++)
 using namespace std;
 
+
+/*
+제거할 수 있는 블록의 경우는 5가지. 5가지를 계속 훑으면 된다. 2번 반복하면 틀린 케이스가 한 개 있었고 3번 반복하니 정답이 됨.
+
+보드의 크기는 최대 50 x 50 이므로 충분히 완전 탐색으로 가능하다.
+*/
+
+
 bool check_line(vector<vector<int>> &bod, int x, int y) { //y 까지 장애물이 없나?
 	FOR(i, 0, x) if (bod[i][y] != 0) return false;
 	return true;
@@ -40,7 +48,7 @@ bool check(vector<vector<int>> &bod, int x, int y) {
 
 int solution(vector<vector<int>> board) {
 	int ans = 0;
-  int cnt = 3;
-  while(cnt--) FOR(i, 0, board.size()) FOR(j, 0, board[0].size()) if (board[i][j] != 0) ans += check(board, i, j);
-  return ans;
+  	int cnt = 3;
+  	while(cnt--) FOR(i, 0, board.size()) FOR(j, 0, board[0].size()) if (board[i][j] != 0) ans += check(board, i, j);
+  	return ans;
 }

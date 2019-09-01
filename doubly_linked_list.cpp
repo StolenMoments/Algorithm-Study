@@ -4,6 +4,7 @@ using namespace std;
 class node {
 public:
 	int value;
+	bool use;
 	node *prev, *next;
 };
 
@@ -60,12 +61,7 @@ public:
 		tail->prev->prev->next = tail;
 		tail->prev = tail->prev->prev;
 	}
-
-	void clear() {
-		head->next = tail;
-		tail->prev = head;
-	}
-
+	
 	void print() {
 		node *cur = head->next;
 

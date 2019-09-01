@@ -45,6 +45,7 @@ vector<pii> convex(vector<pii> v){
 int main() {
 	sws;
 	int N, a, b;
+	vector<pii> v;
 	while (N--) {
 		cin >> a >> b;
 		v.push_back(mp(a, b));

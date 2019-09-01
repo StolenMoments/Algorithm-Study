@@ -4,7 +4,6 @@ using namespace std;
 class node {
 public:
 	int value;
-	bool use;
 	node *prev, *next;
 };
 

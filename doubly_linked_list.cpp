@@ -60,7 +60,25 @@ public:
 		tail->prev->prev->next = tail;
 		tail->prev = tail->prev->prev;
 	}
-	
+
+	int front() {
+		if (head->next == tail) {
+			printf("리스트가 비었습니다.\n");
+			return;
+		}
+
+		return head->next->value;
+	}
+
+	int back() {
+		if (tail->prev == head) {
+			printf("리스트가 비었습니다.\n");
+			return;
+		}
+
+		return tail->prev->value;
+	}
+
 	void print() {
 		node *cur = head->next;
 

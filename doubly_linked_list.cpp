@@ -1,4 +1,5 @@
 #include <iostream>
+#include <queue>
 using namespace std;
 
 class node {
@@ -13,10 +14,7 @@ node heap[200000]; // 힙 영역에서 할당하는 방식이 동적 할당보�
 class LIST {
 private:
 	bool empty_check() {
-		if (head->next == tail || tail->prev == head) {
-			printf("리스트가 비었습니다.\n");
-			return true;
-		}
+		if (head->next == tail || tail->prev == head) return true;
 		return false;
 	}
 public:
@@ -64,13 +62,13 @@ public:
 	}
 
 	int front() {
-		if (empty_check()) return -1;
+		if (empty_check()) throw out_of_range("리스트가 비었습니다\n");
 
 		return head->next->value;
 	}
 
 	int back() {
-		if (empty_check()) return -1;
+		if (empty_check()) throw out_of_range("리스트가 비었습니다\n");
 
 		return tail->prev->value;
 	}
@@ -111,7 +109,13 @@ int main() {
 	list.pop_front();
 	list.pop_front();
 	list.pop_front();
-	list.pop_back(); // 비었다는 메시지
+
+	try {
+		printf("%d %d\n", list.front(), list.back()); // 리스트가 비었으므로 throw error
+	}
+	catch (out_of_range e) {
+		printf("%s", e.what()); // 에러 메시지 출력
+	}
 
 	printf("%d\n", list.empty()); // 1 출력
 

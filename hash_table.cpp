@@ -29,6 +29,7 @@ bool cmp(char *str, char *dest) {
 class Node {
 public:
 	char data[10];
+	int value;
 	Node *prev, *next;
 };
 
@@ -46,9 +47,10 @@ public:
 		tail->prev = head;
 	}
 
-	void add(char *str) {
+	void add(char *str, int value) {
 		Node *newnode = &heap[heapidx++];
 		cpy(str, newnode->data);
+		newnode->value = value;
 
 		head->next->prev = newnode;
 		newnode->next = head->next;
@@ -56,13 +58,15 @@ public:
 		head->next = newnode;
 	}
 
-	bool find(char *str) {
+	int find(char *str) {
 		Node *ptr = head->next;
 		while (ptr != tail) {
-			if (cmp(str, ptr->data)) return true;
+			if (cmp(str, ptr->data)) {
+				return ptr->value;
+			}
 			ptr = ptr->next;
 		}
-		return false;
+		return -1;
 	}
 
 };
@@ -70,10 +74,11 @@ public:
 List table[50000];
 
 int main() {
+	int val;
 	char A[10], B[10];
-	cin >> A;
-	table[hash_func(A)].add(A);
+	cin >> A >> val;
+	table[hash_func(A)].add(A, val);
 
 	cin >> B;
-	cout << table[hash_func(B)].find(B); //존재하면 1, 없으면 0
+	cout << table[hash_func(B)].find(B); //존재하면 해당 value, 없으면 -1
 }

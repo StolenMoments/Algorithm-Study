@@ -1,4 +1,4 @@
-## 그냥 완전 탐색 해보리기~
+// 그냥 완전 탐색 해보리기~
 
 #include <string>
 #include <vector>

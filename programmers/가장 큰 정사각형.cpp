@@ -7,7 +7,6 @@ using namespace std;
 
 int D[1002][1002];
 int solution(vector<vector<int>> board){
-	int sz = min(board.size(), board[0].size());
 	int ans = 0;
 	for (int i = 0; i < board.size(); i++) {
 		for (int j = 0; j < board[0].size(); j++) {

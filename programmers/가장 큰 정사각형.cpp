@@ -16,5 +16,5 @@ int solution(vector<vector<int>> board){
             ans = max(ans, D[i][j]);
 		}
 	}
-  return ans * ans;
+  	return ans * ans;
 }

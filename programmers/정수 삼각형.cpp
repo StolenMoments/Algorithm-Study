@@ -16,6 +16,9 @@ int solution(vector<vector<int>> triangle) {
         D[i][ed] = D[i - 1][ed - 1] + triangle[i][ed];
         for(int j = 1; j < ed; j++) D[i][j] = max(D[i - 1][j - 1], D[i - 1][j]) + triangle[i][j];
     }
-    for(int i = 0; i < triangle.size(); i++) answer = max(answer, D[triangle.size() - 1][i]);
+    
+    int ed = triangle.size() - 1;
+    for(int i = 0; i <= ed; i++) answer = max(answer, D[ed][i]);
+    
     return answer;
 }

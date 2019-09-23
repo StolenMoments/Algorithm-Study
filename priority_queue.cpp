@@ -2,6 +2,7 @@
 #include <vector>
 using namespace std;
 
+#define MAX 10000000
 #define MAX_HEAP 1000
 
 template<typename T>
@@ -11,6 +12,9 @@ private:
 	int _size = 0;
 
 public:
+	heap() {
+		for (int i = 0; i < MAX_HEAP; i++) _heap[i] = -MAX;
+	}
 	void push(T x) {
 		if (_size == MAX_HEAP) {
 			cout << "최대 크기 도달\n";
@@ -19,7 +23,7 @@ public:
 		_heap[_size] = x;
 		int now = _size++;
 		while (now != 0 && _heap[(now - 1) / 2] < _heap[now]) {
-			swap(_heap[now / 2], _heap[now]);
+			swap(_heap[(now - 1) / 2], _heap[now]);
 			now = (now - 1) / 2;
 		}
 	}
@@ -30,21 +34,22 @@ public:
 			return 0;
 		}
 
+
 		_size--;
 		int now, ret = _heap[0];
 
 		if (_heap[1] > _heap[2]) {
 			_heap[0] = _heap[1];
-			_heap[1] = 0;
+			_heap[1] = -MAX;
 			now = 1;
 		}
-		else {
+		else if (_heap[1] <= _heap[2]){
 			_heap[0] = _heap[2];
-			_heap[2] = 0;
+			_heap[2] = -MAX;
 			now = 2;
 		}
 
-		while (now < _size) {
+		while (now  < _size) {
 			if (_heap[now * 2 + 1] < _heap[now * 2 + 2]) {
 				swap(_heap[now * 2 + 2], _heap[now]);
 				now = now * 2 + 2;
@@ -54,7 +59,6 @@ public:
 				now = now * 2 + 1;
 			}
 		}
-
 		return ret;
 	}
 };
@@ -64,16 +68,16 @@ int main() {
 
 	heap<int> pq;
 	pq.push(3);
-	pq.push(4);
-	pq.push(1);
+	pq.push(-4);
+	pq.push(-1);
 	pq.push(11);
 	pq.push(6);
 
 	cout << pq.pop() << endl; // 11
 	cout << pq.pop() << endl; // 6
-	cout << pq.pop() << endl; // 4
 	cout << pq.pop() << endl; // 3
-	cout << pq.pop() << endl; // 1
+	cout << pq.pop() << endl; // -1
+	cout << pq.pop() << endl; // -4
 	cout << pq.pop() << endl; // 비어있음 0
 
 

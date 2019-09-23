@@ -75,4 +75,16 @@ int main() {
 	cout << pq.pop() << endl; // 1
 
 	cout << pq.pop() << endl; // 비어있음
+	
+	pq.push(144);
+	pq.push(1156);
+	pq.push(77);
+	pq.push(150);
+
+	cout << pq.pop() << endl; // 1156
+	cout << pq.pop() << endl; // 150
+	cout << pq.pop() << endl; // 144
+	cout << pq.pop() << endl; // 77
+	
+	cout << pq.pop() << endl; // 비어있음 0
 }

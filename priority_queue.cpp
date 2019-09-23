@@ -2,7 +2,7 @@
 #include <vector>
 using namespace std;
 
-#define MAX 10000000
+#define MAX 100000000
 #define MAX_HEAP 1000
 
 template<typename T>
@@ -36,7 +36,7 @@ public:
 
 
 		_size--;
-		int now, ret = _heap[0];
+		T now, ret = _heap[0];
 
 		if (_heap[1] > _heap[2]) {
 			_heap[0] = _heap[1];
@@ -65,7 +65,6 @@ public:
 
 
 int main() {
-
 	heap<int> pq;
 	pq.push(3);
 	pq.push(-4);

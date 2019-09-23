@@ -33,10 +33,10 @@ public:
 			cout << "비어있음 ";
 			return 0;
 		}
-
-
 		_size--;
-		T now, ret = _heap[0];
+		
+		int now;
+		T ret = _heap[0];
 
 		if (_heap[1] > _heap[2]) {
 			_heap[0] = _heap[1];

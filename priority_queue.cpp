@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 
 #define MAX_HEAP 1000
@@ -25,7 +26,7 @@ public:
 
 	T pop() {
 		if (_size == 0) {
-			cout << "비어있음\n";
+			cout << "비어있음 ";
 			return 0;
 		}
 
@@ -73,9 +74,9 @@ int main() {
 	cout << pq.pop() << endl; // 4
 	cout << pq.pop() << endl; // 3
 	cout << pq.pop() << endl; // 1
+	cout << pq.pop() << endl; // 비어있음 0
 
-	cout << pq.pop() << endl; // 비어있음
-	
+
 	pq.push(144);
 	pq.push(1156);
 	pq.push(77);
@@ -85,6 +86,6 @@ int main() {
 	cout << pq.pop() << endl; // 150
 	cout << pq.pop() << endl; // 144
 	cout << pq.pop() << endl; // 77
-	
 	cout << pq.pop() << endl; // 비어있음 0
+
 }

@@ -5,6 +5,7 @@ void quick(int *arr, int l, int r) {
 	if (l < r) {
 		// swap(arr[l], arr[idx]) idx : 피봇으로 설정할 인덱스
 		// 시작이나 끝을 피벗으로 잡을 경우, 정렬된 배열을 정렬할 때 런타임 에러 발생
+		// 중앙으로 놓으면 정렬된 배열을 정렬해도 잘 됨
 		int pivot = l;
 		int i = l;
 		int j = r;

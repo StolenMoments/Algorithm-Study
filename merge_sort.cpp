@@ -14,19 +14,20 @@ void msort(int* arr, int l, int r) {
 	
 	int idx = 0;
 	int left = l;
-	int right = (l + r) / 2 + 1;
+	int mid = (l + r) / 2;
+	int right = mid + 1;
 
-	msort(arr, l, right - 1);
+	msort(arr, l, mid);
 	msort(arr, right, r);
 
 
-	while (left <= (l + r) / 2 && right <= r) {
+	while (left <= mid && right <= r) {
 		if (arr[left] < arr[right]) tmp[idx++] = arr[left++];
 		else tmp[idx++] = arr[right++];
 	}
 	
 
-	while (left <= (l + r) / 2) tmp[idx++] = arr[left++];
+	while (left <= mid) tmp[idx++] = arr[left++];
 	while (right <= r) tmp[idx++] = arr[right++];
 
 	idx = 0;

@@ -17,9 +17,6 @@ int tmp[800000];
 
 void quick(int* arr, int l, int r) {
 	if (l < r) {
-		// swap(arr[l], arr[idx]) idx : 피봇으로 설정할 인덱스
-		// 시작이나 끝을 피벗으로 잡을 경우, 정렬된 배열을 정렬할 때 런타임 에러 발생
-		// 중앙으로 놓으면 정렬된 배열을 정렬해도 잘 됨
 		int pivot = l;
 		int i = l;
 		int j = r;
@@ -28,7 +25,6 @@ void quick(int* arr, int l, int r) {
 			while (arr[i] <= arr[pivot] && i < r) i++;
 			while (arr[j] > arr[pivot]) j--;
 			if (i < j) {
-				// swap 함수가 생각보다 시간을 좀 잡아먹더라..
 				tmp = arr[i];
 				arr[i] = arr[j];
 				arr[j] = tmp;
@@ -142,7 +138,9 @@ int cmp(const void* a, const void* b)
 }
 
 int main() {
-	for (int i = 0; i < 800000; i++) arr1[i] = arr2[i] = arr3[i] = arr4[i] = arr5[i] = arr6[i] = rand() + rand() * 10 + rand() * 100;
+	// 10만 부터 정렬된 배열을 가지고 해보니
+	// 시작 피벗, 끝 피벗과 중간 피벗의 시간 차이를 볼 수 있었다.
+	for (int i = 0; i < 800000; i++) arr1[i] = arr2[i] = arr3[i] = arr4[i] = arr5[i] = arr6[i] = i < 100000 ? rand() + rand() * 10 + rand() * 100 : i;
 
 	chrono::system_clock::time_point start = chrono::system_clock::now();
 	quick(arr1, 0, 799999);

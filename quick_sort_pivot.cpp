@@ -9,14 +9,22 @@ void quick(int *arr, int l, int r) {
 		int pivot = l;
 		int i = l;
 		int j = r;
-
+		int tmp;
 		while (i < j) {
 			while (arr[i] <= arr[pivot] && i < r) i++;
 			while (arr[j] > arr[pivot]) j--;
-			if (i < j) swap(arr[i], arr[j]);
+			if (i < j) {
+				// swap 함수가 생각보다 시간을 좀 잡아먹더라..
+				tmp = arr[i];
+				arr[i] = arr[j];
+				arr[j] = tmp;
+			}
 		}
 		
-		swap(arr[pivot], arr[j]);
+		tmp = arr[pivot];
+		arr[pivot] = arr[j];
+		arr[j] = tmp;
+		
 		quick(arr, l, j - 1);
 		quick(arr, j + 1, r);
 	}

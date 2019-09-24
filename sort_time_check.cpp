@@ -14,19 +14,31 @@ int arr5[800000];
 int arr6[800000];
 int tmp[800000];
 
+
 void quick(int* arr, int l, int r) {
 	if (l < r) {
+		// swap(arr[l], arr[idx]) idx : 피봇으로 설정할 인덱스
+		// 시작이나 끝을 피벗으로 잡을 경우, 정렬된 배열을 정렬할 때 런타임 에러 발생
+		// 중앙으로 놓으면 정렬된 배열을 정렬해도 잘 됨
 		int pivot = l;
 		int i = l;
 		int j = r;
-
+		int tmp;
 		while (i < j) {
 			while (arr[i] <= arr[pivot] && i < r) i++;
 			while (arr[j] > arr[pivot]) j--;
-			if (i < j) swap(arr[i], arr[j]);
+			if (i < j) {
+				// swap 함수가 생각보다 시간을 좀 잡아먹더라..
+				tmp = arr[i];
+				arr[i] = arr[j];
+				arr[j] = tmp;
+			}
 		}
 
-		swap(arr[pivot], arr[j]);
+		tmp = arr[pivot];
+		arr[pivot] = arr[j];
+		arr[j] = tmp;
+
 		quick(arr, l, j - 1);
 		quick(arr, j + 1, r);
 	}
@@ -34,7 +46,10 @@ void quick(int* arr, int l, int r) {
 
 void quick2(int* arr, int l, int r) {
 	if (l < r) {
-		swap(arr[l], arr[r]);
+		int tmp = arr[l];
+		arr[l] = arr[r];
+		arr[r] = tmp;
+
 		int pivot = l;
 		int i = l;
 		int j = r;
@@ -42,10 +57,16 @@ void quick2(int* arr, int l, int r) {
 		while (i < j) {
 			while (arr[i] <= arr[pivot] && i < r) i++;
 			while (arr[j] > arr[pivot]) j--;
-			if (i < j) swap(arr[i], arr[j]);
+			if (i < j) {
+				tmp = arr[i];
+				arr[i] = arr[j];
+				arr[j] = tmp;
+			}
 		}
 
-		swap(arr[pivot], arr[j]);
+		tmp = arr[pivot];
+		arr[pivot] = arr[j];
+		arr[j] = tmp;
 		quick2(arr, l, j - 1);
 		quick2(arr, j + 1, r);
 	}
@@ -53,7 +74,10 @@ void quick2(int* arr, int l, int r) {
 
 void quick3(int* arr, int l, int r) {
 	if (l < r) {
-		swap(arr[l], arr[(l + r) / 2]);
+		int tmp = arr[(l + r) / 2];
+		arr[(l + r) / 2] = arr[l];
+		arr[l] = tmp;
+
 		int pivot = l;
 		int i = l;
 		int j = r;
@@ -61,10 +85,16 @@ void quick3(int* arr, int l, int r) {
 		while (i < j) {
 			while (arr[i] <= arr[pivot] && i < r) i++;
 			while (arr[j] > arr[pivot]) j--;
-			if (i < j) swap(arr[i], arr[j]);
+			if (i < j) {
+				tmp = arr[i];
+				arr[i] = arr[j];
+				arr[j] = tmp;
+			}
 		}
 
-		swap(arr[pivot], arr[j]);
+		tmp = arr[pivot];
+		arr[pivot] = arr[j];
+		arr[j] = tmp;
 		quick3(arr, l, j - 1);
 		quick3(arr, j + 1, r);
 	}
@@ -73,7 +103,11 @@ void quick3(int* arr, int l, int r) {
 void msort(int l, int r) {
 	if (l == r) return;
 	if (r - l == 1) {
-		if (arr4[r] < arr4[l]) swap(arr4[r], arr4[l]);
+		if (arr4[r] < arr4[l]) {
+			int tmp = arr4[l];
+			arr4[l] = arr4[r];
+			arr4[r] = tmp;
+		}
 		return;
 	}
 	
@@ -98,7 +132,8 @@ void msort(int l, int r) {
 	for (int i = l; i <= r; i++) arr4[i] = tmp[idx++];
 }
 
-int cmp(const void* a, const void* b){
+int cmp(const void* a, const void* b)
+{
 	int x = *(int*)a;
 	int y = *(int*)b;
 

@@ -10,7 +10,7 @@ class heap {
 private:
 	T _heap[MAX_HEAP];
 	int _size = 0;
-	int _flag = 1; // -1 이면 작은  우선, 1이면 큰 수 우선
+	int _flag = 1; // -1 이면 작은 수 우선, 1이면 큰 수 우선
 
 public:
 	heap() {

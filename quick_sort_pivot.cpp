@@ -3,6 +3,7 @@ using namespace std;
 
 void quick(int *arr, int l, int r) {
 	if (l < r) {
+		//swap(arr[l], arr[idx]) idx : 피봇으로 설정할 인덱스
 		int pivot = l;
 		int i = l;
 		int j = r;

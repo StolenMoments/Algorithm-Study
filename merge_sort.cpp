@@ -21,16 +21,16 @@ void msort(int* arr, int l, int r) {
 
 
 	while (left <= (l + r) / 2 && right <= r) {
-		if (arr4[left] < arr4[right]) tmp[idx++] = arr4[left++];
-		else tmp[idx++] = arr4[right++];
+		if (arr[left] < arr[right]) tmp[idx++] = arr[left++];
+		else tmp[idx++] = arr[right++];
 	}
 	
 
-	while (left <= (l + r) / 2) tmp[idx++] = arr4[left++];
-	while (right <= r) tmp[idx++] = arr4[right++];
+	while (left <= (l + r) / 2) tmp[idx++] = arr[left++];
+	while (right <= r) tmp[idx++] = arr[right++];
 
 	idx = 0;
-	for (int i = l; i <= r; i++) arr4[i] = tmp[idx++];
+	for (int i = l; i <= r; i++) arr[i] = tmp[idx++];
 }
 
 int main(){

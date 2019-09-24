@@ -1,21 +1,24 @@
 #include <iostream>
 using namespace std;
 
-void quick(int* arr, int l, int r) {
-	if (l < r){
-		int pivot = arr[l];
-		int i = r + 1;
+void quick(int *arr, int l, int r) {
+	if (l < r) {
+		int pivot = l;
+		int i = l;
+		int j = r;
 
-		for (int j = r; j > l; j--) // 시작을 피봇으로 잡았으므로 역방향 루프
-			if (arr[j] >= pivot) 	swap(arr[--i], arr[j]); // 피봇보다 큰 값을 오른쪽으로 몰아 넣는다.
-
-		swap(arr[i - 1], arr[l]);
-
-		quick(arr, l, i - 2);
-		quick(arr, i, r);
+		while (i < j) {
+			while (arr[i] <= arr[pivot] && i < r) i++;
+			while (arr[j] > arr[pivot]) j--;
+			if (i < j) swap(arr[i], arr[j]);
+		}
+		
+		swap(arr[pivot], arr[j]);
+		quick(arr, l, j - 1);
+		quick(arr, j + 1, r);
 	}
-
 }
+
 int main() {
 	int arr[10] = { 3,4,1,7,4,5,10,7,9,1 };
 	quick(arr, 0, 9);

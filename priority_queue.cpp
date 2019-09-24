@@ -10,6 +10,7 @@ class heap {
 private:
 	T _heap[MAX_HEAP];
 	int _size = 0;
+	int _flag = 1; // -1 이면 작은  우선, 1이면 큰 수 우선
 
 public:
 	heap() {
@@ -20,7 +21,7 @@ public:
 			cout << "최대 크기 도달\n";
 			return;
 		}
-		_heap[_size] = x;
+		_heap[_size] = x * _flag;
 		int now = _size++;
 		while (now != 0 && _heap[(now - 1) / 2] < _heap[now]) {
 			swap(_heap[(now - 1) / 2], _heap[now]);
@@ -34,22 +35,22 @@ public:
 			return 0;
 		}
 		_size--;
-		
+
 		int now;
-		T ret = _heap[0];
+		T ret = _heap[0] * _flag;
 
 		if (_heap[1] > _heap[2]) {
 			_heap[0] = _heap[1];
 			_heap[1] = -MAX;
 			now = 1;
 		}
-		else if (_heap[1] <= _heap[2]){
+		else if (_heap[1] <= _heap[2]) {
 			_heap[0] = _heap[2];
 			_heap[2] = -MAX;
 			now = 2;
 		}
 
-		while (now  < _size) {
+		while (now < _size) {
 			if (_heap[now * 2 + 1] < _heap[now * 2 + 2]) {
 				swap(_heap[now * 2 + 2], _heap[now]);
 				now = now * 2 + 2;

@@ -1,0 +1,141 @@
+#include <iostream>
+#include <algorithm>
+#include <ctime>
+#include <chrono>
+#include <functional>
+#pragma warning(disable:4996)
+using namespace std;
+
+int arr1[800000];
+int arr2[800000];
+int arr3[800000];
+int arr4[800000];
+int arr5[800000];
+int arr6[800000];
+int tmp[800000];
+
+void quick(int* arr, int l, int r) {
+	if (l < r) {
+		int pivot = l;
+		int i = l;
+		int j = r;
+
+		while (i < j) {
+			while (arr[i] <= arr[pivot] && i < r) i++;
+			while (arr[j] > arr[pivot]) j--;
+			if (i < j) swap(arr[i], arr[j]);
+		}
+
+		swap(arr[pivot], arr[j]);
+		quick(arr, l, j - 1);
+		quick(arr, j + 1, r);
+	}
+}
+
+void quick2(int* arr, int l, int r) {
+	if (l < r) {
+		swap(arr[l], arr[r]);
+		int pivot = l;
+		int i = l;
+		int j = r;
+
+		while (i < j) {
+			while (arr[i] <= arr[pivot] && i < r) i++;
+			while (arr[j] > arr[pivot]) j--;
+			if (i < j) swap(arr[i], arr[j]);
+		}
+
+		swap(arr[pivot], arr[j]);
+		quick2(arr, l, j - 1);
+		quick2(arr, j + 1, r);
+	}
+}
+
+void quick3(int* arr, int l, int r) {
+	if (l < r) {
+		swap(arr[l], arr[(l + r) / 2]);
+		int pivot = l;
+		int i = l;
+		int j = r;
+
+		while (i < j) {
+			while (arr[i] <= arr[pivot] && i < r) i++;
+			while (arr[j] > arr[pivot]) j--;
+			if (i < j) swap(arr[i], arr[j]);
+		}
+
+		swap(arr[pivot], arr[j]);
+		quick3(arr, l, j - 1);
+		quick3(arr, j + 1, r);
+	}
+}
+
+void msort(int l, int r) {
+	if (l == r) return;
+	if (r - l == 1) {
+		if (arr4[r] < arr4[l]) swap(arr4[r], arr4[l]);
+		return;
+	}
+	
+	int idx = 0;
+	int left = l;
+	int right = (l + r) / 2 + 1;
+
+	msort(l, right - 1);
+	msort(right, r);
+
+
+	while (left <= (l + r) / 2 && right <= r) {
+		if (arr4[left] < arr4[right]) tmp[idx++] = arr4[left++];
+		else tmp[idx++] = arr4[right++];
+	}
+	
+
+	while (left <= (l + r) / 2) tmp[idx++] = arr4[left++];
+	while (right <= r) tmp[idx++] = arr4[right++];
+
+	idx = 0;
+	for (int i = l; i <= r; i++) arr4[i] = tmp[idx++];
+}
+
+int cmp(const void* a, const void* b){
+	int x = *(int*)a;
+	int y = *(int*)b;
+
+	if (x < y) return -1;
+	return x > y;
+}
+
+int main() {
+	for (int i = 0; i < 800000; i++) arr1[i] = arr2[i] = arr3[i] = arr4[i] = arr5[i] = arr6[i] = rand() + rand() * 10 + rand() * 100;
+
+	chrono::system_clock::time_point start = chrono::system_clock::now();
+	quick(arr1, 0, 799999);
+	chrono::duration<double> sec = chrono::system_clock::now() - start;
+	cout << "시작 피벗 : " << sec.count() << endl;
+
+	start = chrono::system_clock::now();
+	quick2(arr2, 0, 799999);
+	sec = chrono::system_clock::now() - start;
+	cout << "끝 피벗 : " << sec.count() << endl;
+
+	start = chrono::system_clock::now();
+	quick3(arr3, 0, 799999);
+	sec = chrono::system_clock::now() - start;
+	cout << "중앙 피벗 : " << sec.count() << endl;
+	
+	start = chrono::system_clock::now();
+	msort(0, 799999);
+	sec = chrono::system_clock::now() - start;
+	cout << "머지 소트 : " << sec.count() << endl;
+
+	start = chrono::system_clock::now();
+	sort(arr5, arr5 + 800000);
+	sec = chrono::system_clock::now() - start;
+	cout << "STL sort : " << sec.count() << endl;
+
+	start = chrono::system_clock::now();
+	qsort(arr6, sizeof(arr6) / sizeof(int), sizeof(int), cmp);
+	sec = chrono::system_clock::now() - start;
+	cout << "qsort : " << sec.count() << endl;
+}

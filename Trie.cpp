@@ -27,7 +27,7 @@ void add(Node* node, char* str, int idx) {
 
 bool find(Node* node, char* str, int idx) {
 	while (str[idx] != '\0') { //입력받은 스트링의 끝까지 탐색
-		if (node->child[str[idx] - 97] == nullptr) return false;
+		if (node->child[str[idx] - 97] == nullptr || node->child[str[idx] - 97]->use == 0) return false;
 		node = node->child[str[idx] - 97];
 		idx++;
 	}

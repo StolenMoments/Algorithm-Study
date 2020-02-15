@@ -1,7 +1,8 @@
 # LCA
 
-### depth[i] : i번 노드의 깊이
-### p[i][j] : i번 노드의 2^j 번째 조상
+- 부모 정보와 깊이 정보를 미리 기록해둔다.
+- **depth[i]** : i번 노드의 깊이
+- **p[i][j]** : i번 노드의 2^j 번째 조상
 
 ```c
 int lca(int x, int y) {
@@ -18,6 +19,6 @@ int lca(int x, int y) {
 	for (int i = 14; i >= 0; i--)
 		if (p[x][i] != p [y][i]) x = p[x][i], y = p[y][i];
 
-	return p[x][0];
+	return p[x][0]; // x,y의 
 }
 ```

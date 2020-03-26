@@ -3,7 +3,7 @@
 - 부모 정보와 깊이 정보를 미리 기록해둔다.
 - **depth[i]** : i번 노드의 깊이
 - **p[i][j]** : i번 노드의 2^j 번째 조상
-
+- **p[i][j] = p[p[i][j - 1]][j - 1]**
 ```c
 int lca(int x, int y) {
 	if (depth[x] > depth[y]) swap(x, y); // depth x < y
